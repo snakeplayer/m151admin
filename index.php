@@ -1,3 +1,13 @@
+<?php
+//Insersion des fichiers ".php"
+require_once 'mysql.inc.php';
+require_once 'Functions.php';
+
+//Appel de la fonction "ConnectDB" avec les constantes définies dans le fichier "mysql.inc.php"
+ConnectDB($host, $dbname, $user, $pwd);
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,18 +68,18 @@
                     </tr>
                     <tr>
                         <td>
-                            Mot de passe : 
-                        </td>
-                        <td>
-                            <input type="password" name="pwd"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             Pseudo : 
                         </td>
                         <td>
                             <input type="text" name="pseudo"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mot de passe : 
+                        </td>
+                        <td>
+                            <input type="password" name="pwd"/>
                         </td>
                     </tr>
                     <tr>
