@@ -4,7 +4,7 @@ require_once 'mysql.inc.php';
 require_once 'Functions.php';
 
 //Appel de la fonction "ConnectDB" avec les constantes définies dans le fichier "mysql.inc.php"
-ConnectDB($host, $dbname, $user, $pwd);
+$db = ConnectDB($host, $dbname, $user, $pwd);
 
 ?>
 
@@ -17,7 +17,7 @@ ConnectDB($host, $dbname, $user, $pwd);
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div id="corps">
+        <div id="corpsForm">
             <form id="formFormualire" method="post" action="#">
                 <table id="tableFormulaire">
                     <th>
@@ -28,58 +28,58 @@ ConnectDB($host, $dbname, $user, $pwd);
                     </tr>
                     <tr>
                         <td>
-                            Nom : 
+                            <label for="nom">Nom :</label>
                         </td>
                         <td>
-                            <input type="text" name="nom"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Prénom : 
-                        </td>
-                        <td>
-                            <input type="text" name="prenom"/>
+                            <input type="text" name="nom" id="nom"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Date de naissance : 
+                            <label for="prenom">Prénom : </label>
                         </td>
                         <td>
-                            <input type="date" name="dateNaissance"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Petite description : 
-                        </td>
-                        <td>
-                            <textarea name="description"></textarea>
+                            <input type="text" name="prenom" id="prenom"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Email : 
+                            <label for="dateNaissance">Date de naissance : </label>
                         </td>
                         <td>
-                            <input type="email" name="email"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Pseudo : 
-                        </td>
-                        <td>
-                            <input type="text" name="pseudo"/>
+                            <input type="date" name="dateNaissance" id="dateNaissance"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Mot de passe : 
+                            <label for="description">Petite description : </label>
                         </td>
                         <td>
-                            <input type="password" name="pwd"/>
+                            <textarea name="description" id="description"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email"> Email : </label>
+                        </td>
+                        <td>
+                            <input type="email" name="email" id="email"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="pseudo">Pseudo :</label>
+                        </td>
+                        <td>
+                            <input type="text" name="pseudo" id="pseudo"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="pwd"> Mot de passe : </label>
+                        </td>
+                        <td>
+                            <input type="password" name="pwd" id="pwd"/>
                         </td>
                     </tr>
                     <tr>
