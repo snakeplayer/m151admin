@@ -3,8 +3,8 @@
 require_once 'mysql.inc.php';
 require_once 'Functions.php';
 
-//Appel de la fonction "ConnectDB" avec les constantes définies dans le fichier "mysql.inc.php"
-$db = ConnectDB($host, $dbname, $user, $pwd);
+//Appel de la fonction "GetConnection()" avec les constantes définies dans le fichier "mysql.inc.php"
+$db = GetConnection();
 
 ?>
 
@@ -24,14 +24,14 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                         Formulaire d'inscription
                     </th>
                     <tr>
-                        <td>--------------------------------</td>
+                        <td>_______________________</td>
                     </tr>
                     <tr>
                         <td>
                             <label for="nom">Nom :</label>
                         </td>
                         <td>
-                            <input type="text" name="nom" id="nom"/>
+                            <input type="text" name="nom" id="nom" required/>
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +39,7 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                             <label for="prenom">Prénom : </label>
                         </td>
                         <td>
-                            <input type="text" name="prenom" id="prenom"/>
+                            <input type="text" name="prenom" id="prenom" required/>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                             <label for="dateNaissance">Date de naissance : </label>
                         </td>
                         <td>
-                            <input type="date" name="dateNaissance" id="dateNaissance"/>
+                            <input type="date" name="dateNaissance" id="dateNaissance" required/>
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                             <label for="email"> Email : </label>
                         </td>
                         <td>
-                            <input type="email" name="email" id="email"/>
+                            <input type="email" name="email" id="email" required/>
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                             <label for="pseudo">Pseudo :</label>
                         </td>
                         <td>
-                            <input type="text" name="pseudo" id="pseudo"/>
+                            <input type="text" name="pseudo" id="pseudo" required/>
                         </td>
                     </tr>
                     <tr>
@@ -79,18 +79,11 @@ $db = ConnectDB($host, $dbname, $user, $pwd);
                             <label for="pwd"> Mot de passe : </label>
                         </td>
                         <td>
-                            <input type="password" name="pwd" id="pwd"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            <input type="submit" name='valider' value='Valider'/><input type="button" name='annuler' value='Annuler'/>
+                            <input type="password" name="pwd" id="pwd" required/>
                         </td>
                     </tr>
                 </table>
+                <input type="submit" name='valider' value='Valider' id="btnValider"/><input type="button" name='annuler' value='Annuler' id="btnAnnuler"/>
             </form>
         </div>
     </body>

@@ -1,9 +1,19 @@
+/*
+Feuille de style du projet "m151admin"
+*/
+
 #corpsForm{
     margin: auto;
     margin-top: 50px;
     width: 380px;
-    height: 300px;
-    border: 1px solid black;
+    height: 270px;
+    background-color: lightgray;
+    border-radius: 15px 5px 15px 5px;
     padding: 20px;
+    font-family: sans-serif;
+}
+
+textarea{
+    resize: none;
 }
 

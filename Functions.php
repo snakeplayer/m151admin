@@ -1,13 +1,16 @@
 <?php
-//Fichier de fonctions
 
+//Fichier de fonctions
 //Fonction de connexion à la base
-function ConnectDB($host, $dbname, $user, $pwd) {
-    try {
-        $db = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pwd);
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage() . "<br/>";
-        die();
+function GetConnection() {
+    static $db = null;
+    if ($db == null) {
+        try {
+            $db = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PWD);
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage() . "<br/>";
+            die();
+        }
     }
     return $db;
 }
