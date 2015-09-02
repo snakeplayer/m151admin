@@ -3,9 +3,17 @@
 require_once 'mysql.inc.php';
 require_once 'Functions.php';
 
-//Appel de la fonction "GetConnection()" avec les constantes définies dans le fichier "mysql.inc.php"
-$db = GetConnection();
+$error = null;
 
+if (isset($_POST['valider'])) {
+    if ($_POST['nom'] != null && $_POST['prenom'] != null && $_POST['dateNaissance'] != null && $_POST['description'] != null && $_POST['email'] != null && $_POST['pseudo'] != null && $_POST['pwd'] != null)
+    {
+        InsertUser($_POST['nom'], $_POST['prenom'], $_POST['dateNaissance'], $_POST['description'], $_POST['email'], $_POST['pseudo'], $_POST['pwd']);
+    }
+ else {
+        $error = 'Veuillez renseigner tous les champs !';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +39,7 @@ $db = GetConnection();
                             <label for="nom">Nom :</label>
                         </td>
                         <td>
-                            <input type="text" name="nom" id="nom" required/>
+                            <input type="text" name="nom" id="nom" />
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +47,7 @@ $db = GetConnection();
                             <label for="prenom">Prénom : </label>
                         </td>
                         <td>
-                            <input type="text" name="prenom" id="prenom" required/>
+                            <input type="text" name="prenom" id="prenom" />
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +55,7 @@ $db = GetConnection();
                             <label for="dateNaissance">Date de naissance : </label>
                         </td>
                         <td>
-                            <input type="date" name="dateNaissance" id="dateNaissance" required/>
+                            <input type="date" name="dateNaissance" id="dateNaissance" />
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +71,7 @@ $db = GetConnection();
                             <label for="email"> Email : </label>
                         </td>
                         <td>
-                            <input type="email" name="email" id="email" required/>
+                            <input type="email" name="email" id="email" />
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +79,7 @@ $db = GetConnection();
                             <label for="pseudo">Pseudo :</label>
                         </td>
                         <td>
-                            <input type="text" name="pseudo" id="pseudo" required/>
+                            <input type="text" name="pseudo" id="pseudo" />
                         </td>
                     </tr>
                     <tr>
@@ -79,11 +87,12 @@ $db = GetConnection();
                             <label for="pwd"> Mot de passe : </label>
                         </td>
                         <td>
-                            <input type="password" name="pwd" id="pwd" required/>
+                            <input type="password" name="pwd" id="pwd" />
                         </td>
                     </tr>
                 </table>
                 <input type="submit" name='valider' value='Valider' id="btnValider"/><input type="button" name='annuler' value='Annuler' id="btnAnnuler"/>
+                <?php echo $error ?>
             </form>
         </div>
     </body>
