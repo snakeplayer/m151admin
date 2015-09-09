@@ -7,6 +7,7 @@ function GetConnection() {
     if ($db == null) {
         try {
             $db = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PWD);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
@@ -19,7 +20,7 @@ function GetConnection() {
 function InsertUser($nom, $prenom, $dateNaissance, $description, $email, $pseudo, $pwd)
 {
     $db = GetConnection();
-    $request = $db->prepare("INSERT INTO `m151admin`.`users` (`idUser`, `nom`, `prenom`, `dateNaissance`, `description`, `email`, `pseudo`, `pwd`) VALUES (NULL, :nom, :prenom, :dateNaissance, :description, :email, :pseudo, :pwd);");
+    $request = $db->prepare("INSERT INTO `m151admin`.`users` (`idUser`, `nom`, `prenom`, `dateNaissance`, `description`, `email`, `pseudo`, `pwd`) VALUES (NULL, :nom, :prenom, :dateNaissance, :description, :email, :pseudo, SHA1(:pwd));");
     
     $request->bindParam(':nom', $nom, PDO::PARAM_STR);
     $request->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -31,5 +32,31 @@ function InsertUser($nom, $prenom, $dateNaissance, $description, $email, $pseudo
     
     $request->execute();
 }
+
+//Fonction permettant de récuperer la liste des utilisateurs
+function GetUsers()
+{
+    $db = GetConnection();
+    $request = $db->prepare("SELECT * FROM `users`");
+    $request->execute();
+    return $request->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function AssocToHtml($tabUser)
+{
+    $htmlUsers = '<table id="tableUsers">';
+    foreach ($tabUser as $value)
+    {
+        $htmlUsers += "<tr>";
+        $htmlUsers += "<td>";
+        $htmlUsers += $value['nom'];
+        $htmlUsers += "</td>";
+        $htmlUsers += "</tr>";
+    }
+    $htmlUsers += "</table>";
+    
+    return $htmlUsers;
+}
+
 ?>
 

@@ -3,17 +3,22 @@
 require_once 'mysql.inc.php';
 require_once 'Functions.php';
 
-$error = null;
+$message = null;
 
 if (isset($_POST['valider'])) {
     if ($_POST['nom'] != null && $_POST['prenom'] != null && $_POST['dateNaissance'] != null && $_POST['description'] != null && $_POST['email'] != null && $_POST['pseudo'] != null && $_POST['pwd'] != null)
     {
         InsertUser($_POST['nom'], $_POST['prenom'], $_POST['dateNaissance'], $_POST['description'], $_POST['email'], $_POST['pseudo'], $_POST['pwd']);
+        $message = "Formulaire envoyé !";
     }
  else {
-        $error = 'Veuillez renseigner tous les champs !';
+        $message = 'Veuillez renseigner tous les champs !';
     }
 }
+
+$tabUser = GetUsers();
+echo AssocToHtml($tabUser);
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +97,7 @@ if (isset($_POST['valider'])) {
                     </tr>
                 </table>
                 <input type="submit" name='valider' value='Valider' id="btnValider"/><input type="button" name='annuler' value='Annuler' id="btnAnnuler"/>
-                <?php echo $error ?>
+                <?php echo $message ?>
             </form>
         </div>
     </body>
