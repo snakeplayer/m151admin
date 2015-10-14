@@ -190,6 +190,10 @@ function TableUsersToHtmlUser($idUser, $tabUsers)
     
 }
 
+function CreateHTMLForm(){
+    
+}
+
 
 ?>
 
