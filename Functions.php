@@ -33,11 +33,44 @@ function InsertUser($nom, $prenom, $dateNaissance, $description, $email, $pseudo
     $request->execute();
 }
 
+//Fonction d'update des infos d'un utilisateur
+function UpdateUser($nom, $prenom, $dateNaissance, $description, $email, $pseudo, $mdp, $idUser)
+{
+    $db = GetConnection();
+    
+    if ($mdp == '') 
+    {
+        $request = $db-> prepare('UPDATE users SET nom=:nom, prenom=:prenom, dateNaissance=:dateNaissance, description=:description, email=:email, pseudo=:pseudo WHERE idUser='.$idUser);
+    }
+    else
+    {
+        $mdp = sha1($mdp);
+        $request = $db-> prepare('UPDATE users SET nom=:nom, prenom=:prenom, dateNaissance=:dateNaissance, description=:description, email=:email, pseudo=:pseudo, pwd=:mdp WHERE idUser='.$idUser);
+        $request->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+    }
+    $request->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $request->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+    $request->bindParam(':dateNaissance', $dateNaissance, PDO::PARAM_STR);
+    $request->bindParam(':description', $description, PDO::PARAM_STR);
+    $request->bindParam(':email', $email, PDO::PARAM_STR);
+    $request->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    
+    $request->execute();
+}
+
 //Fonction permettant de récuperer la liste des utilisateurs
 function GetUsers()
 {
     $db = GetConnection();
     $request = $db->prepare("SELECT * FROM `users`");
+    $request->execute();
+    return $request->fetchAll(PDO::FETCH_ASSOC);
+}
+//Fonction permettant de récuperer la liste des détails d'un utilisateur par rapport à son id
+function GetUsersById($id)
+{
+    $db = GetConnection();
+    $request = $db->prepare("SELECT * FROM `users` WHERE `idUser` = ".$id);
     $request->execute();
     return $request->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -59,7 +92,7 @@ function AssocToHtml($tabUser)
         $htmlUsers .= "<a href=\"users.php?id=".$tabUser[$i]['idUser']."\">Afficher</a>";
         $htmlUsers .= "</td>";
         $htmlUsers .= "<td>";
-        $htmlUsers .= "<a href=\"modifier_users.php?id=".$tabUser[$i]['idUser']."\">Modifier</a>";
+        $htmlUsers .= "<a href=\"index.php?id=".$tabUser[$i]['idUser']."\">Modifier</a>";
         $htmlUsers .= "</td>";
         $htmlUsers .= "</tr>";
     }
