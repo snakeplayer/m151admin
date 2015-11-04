@@ -2,6 +2,9 @@
 //Insersion des fichiers ".php"
 require_once 'mysql.inc.php';
 require_once 'Functions.php';
+if (isset($_SESSION["idLogged"])) {
+    echo $_SESSION["idLogged"];
+}
 
 $message = null;
 
@@ -125,7 +128,7 @@ if (isset($_GET['id'])) {
                             </td>
                         </tr>
                     </table>
-                    <input type="submit" name='valider' value='Valider' id="btnValider"/><input type="button" name='annuler' value='Annuler' id="btnAnnuler"/>
+                    <input type="submit" name='valider' value='Valider' id="btnValider"/><input type="button" name='annuler' value='Annuler' id="btnAnnuler"/><a href="./users.php">Utilisateurs</a>
 <?php echo $message ?>
                 </form>
             </div>

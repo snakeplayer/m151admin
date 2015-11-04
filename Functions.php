@@ -1,5 +1,7 @@
 <?php
 //Fichier de fonctions
+session_start();
+$_SESSION["idLogged"];
 
 //Fonction de connexion à la base
 function GetConnection() {
@@ -223,10 +225,18 @@ function TableUsersToHtmlUser($idUser, $tabUsers)
     
 }
 
-function CreateHTMLForm(){
-    
+function TestLogin($pseudo, $password)
+{
+    $db = GetConnection();
+    $request = $db->prepare('SELECT idUser, pseudo, pwd FROM `users` WHERE pseudo = '.$pseudo.' AND pwd = '.$password.'');
+    $request->execute();
+    $tabUser = $request->fetchAll(PDO::FETCH_ASSOC);
+    if ($tabUser != null) {
+        return $tabUser["id"];
+    }
+    else {
+        return false;
+    }
 }
-
-
 ?>
 
