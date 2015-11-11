@@ -1,5 +1,6 @@
 <?php
 //Fichier de fonctions
+//TODO séparer fonctions d'affichage et fonctions bd dans deux fichiers distincts
 session_start();
 $_SESSION["idLogged"];
 
