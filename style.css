@@ -29,3 +29,12 @@ textarea{
     resize: none;
 }
 
+header{
+    height: 30px;
+    width: 600px;
+    margin: auto;
+    border: 1px solid lightgray;
+    border-radius: 2px 2px 2px 2px;
+    
+}
+
